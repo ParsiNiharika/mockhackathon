@@ -1,13 +1,42 @@
 import {useNavigate} from 'react-router-dom'
-
+import {useState} from 'react'
 function Schedule({day}) {
+const [Monday,setMonday]=useState([])
+const [Tuesday,setTuesday]=useState([])
+const [Wednesday,setWednesday]=useState([])
+const [Thursday,setThursday]=useState([])
+const [Friday,setFriday]=useState([])
+const [Saturday,setSaturday]=useState([])
 
-    let Monday=[{"time":"10am-11am",class:"Class6",subject:"Math",content:"abc"},{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
-    let Tuesday=[{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
-    let Wednesday=[{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
-   let Thrusday=[{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
-    let Friday=[{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
-    let Saturday=[{"time":"11am-12am",class:"Class7",subject:"Hindi"}]
+const user={mail:'sample@gmail.com'}
+    fetch('http://localhost:3000/admin/getcontent',{
+
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify(user)
+
+    })
+   .then(res=>{
+
+    return res.json()
+   })
+   .then(data=>{
+       console.log(data)
+const userObj=data.teacherObj
+setMonday(userObj.Monday)
+setTuesday(userObj.Tuesday)
+setWednesday(userObj.Wednesday)
+setThursday(userObj.Thursday)
+setFriday(userObj.Friday)
+setSaturday(userObj.Saturday)
+
+   }
+
+
+)
+
+
+   
         let navigate=useNavigate()
         
     return ( 
@@ -43,7 +72,7 @@ function Schedule({day}) {
                     </div>
                 </div >)}
 
-                {(day=="Thrusday") && Thrusday.map((element)=>
+                {(day=="Thursday") && Thursday.map((element)=>
                 <div class="card w-50 mx-auto mb-4">
                     <div class="card-header ">{element["time"]}</div>
                     <div class="card-body">

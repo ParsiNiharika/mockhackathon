@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors=require('cors')
 var mc=require("mongodb").MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,7 +11,7 @@ var adminApi=require('./routes/admin')
 
 var app = express();
  dburl="mongodb+srv://mock:mock@nandakishor.gzlym.mongodb.net/mockdata?retryWrites=true&w=majority"
-
+app.use(cors())
 mc.connect(dburl,{useUnifiedTopology:true,useNewUrlParser:true},(err,client)=>{
 
 if(err){

@@ -61,8 +61,11 @@ adminApi.post('/addcontent',asyncHandler(async(req,res,next)=>{
 
 adminApi.post('/getcontent',asyncHandler(async(req,res,next)=>{
 
-content=req.body
-let 
+    content=req.body
+    dbObj=req.app.get('databaseObject')
+    colObj=dbObj.collection('teachersContent')
+    teacherObject=await colObj.findOne({mail:{$eq:content.mail}})
+    res.send({message:'teacher details',teacherObj:teacherObject})
 
 
 
